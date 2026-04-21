@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/MuFarm.API/MuFarm.API.csproj" Id="c2a945bc-7448-422d-83f5-873ccbde787f" />
+    <Project Path="src/MuFarm.Application/MuFarm.Application.csproj" />
+    <Project Path="src/MuFarm.Domain/MuFarm.Domain.csproj" />
+    <Project Path="src/MuFarm.Infrastructure/MuFarm.Infrastructure.csproj" Id="c34a29a5-bd27-4ff0-969d-7d67a4c5f99e" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/MuFarm.IntegrationTests/MuFarm.IntegrationTests.csproj" Id="de0687cb-11b3-408d-ac81-edcf3bedc624" />
+    <Project Path="tests/MuFarm.UnitTests/MuFarm.UnitTests.csproj" Id="68c2a30a-28bb-4658-885c-d04560fb3e65" />
+  </Folder>
+</Solution>
