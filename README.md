@@ -19,7 +19,7 @@ This project demonstrates building software from scratch while applying modern s
 ## Tech Stack
 
 - **Backend:** ASP.NET Core Web API (latest .NET version)  
-- **Database:** SQL Server  
+- **Database:** PostgreSQL with Docker  
 - **ORM:** Entity Framework Core  
 - **Architecture:** Layered architecture for separation of concerns (API, Application, Domain, Infrastructure)  
 - **Testing:** xUnit (planned for unit and integration testing)  
@@ -38,11 +38,40 @@ The project follows a layered architecture:
 This structure ensures separation of concerns and maintainability.
 
 
+## Key Dependencies
+
+### Database
+- Npgsql.EntityFrameworkCore.PostgreSQL – PostgreSQL provider for EF Core
+
+
 ## Getting Started
 
-Setup instructions will be added as the project progresses. 
+### Prerequisites
+- .NET SDK
+- Docker Desktop
+
+### Running the Database
+
+To start the PostgreSQL database using Docker, navigate to the `docker` folder and run:
+
+docker-compose up -d
 
 
 ## Project Status
 
 This project is currently in active development. Features and structure may evolve as new concepts and practices are applied. 
+
+
+## Technical Decisions
+
+### Guid vs. int
+
+I’m using GUIDs for primary keys since they’re globally unique and don’t rely on the database generating sequential IDs. It also helps when thinking about scaling or if multiple services end up creating data.
+
+It’s also nice that they’re harder to predict when exposed through APIs.
+
+### Switching to PostgreSQL with Docker
+
+This project uses PostgreSQL to emphasize portability and modern development practices. PostgreSQL integrates well with Docker, making local setup and deployment more consistent across environments.
+
+It also allows me to apply my SQL Server knowledge while adapting to a widely used, open-source relational database with minimal syntax differences. 

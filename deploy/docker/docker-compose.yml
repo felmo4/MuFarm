@@ -1,0 +1,17 @@
+
+services:
+  mufarm-db:
+    image: postgres:16
+    container_name: mufarm-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: mufarmdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - mufarm_data:/var/lib/postgresql/data
+
+volumes:
+  mufarm_data:
