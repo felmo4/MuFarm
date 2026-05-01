@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MuFarm.Application\MuFarm.Application.csproj" />
     <ProjectReference Include="..\MuFarm.Domain\MuFarm.Domain.csproj" />
   </ItemGroup>
 

@@ -15,10 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\MuFarm.Application\MuFarm.Application.csproj" />
     <ProjectReference Include="..\MuFarm.Infrastructure\MuFarm.Infrastructure.csproj" />
   </ItemGroup>

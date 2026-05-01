@@ -2,4 +2,9 @@
 
 
 
-###
+### Create a new Crop Job
+POST {{MuFarm.API_HostAddress}}/api/cropjobs
+Content-Type: application/json
+{
+  "cropId" : 2
+}

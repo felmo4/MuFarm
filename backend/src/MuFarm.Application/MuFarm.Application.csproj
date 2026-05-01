@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MuFarm.Domain\MuFarm.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

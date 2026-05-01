@@ -16,5 +16,10 @@ namespace MuFarm.Infrastructure.Data
 
         public DbSet<Crop> Crops => Set<Crop>();
         public DbSet<CropJob> CropJobs => Set<CropJob>();
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(MuFarmDbContext).Assembly);
+        }
     }
 }
