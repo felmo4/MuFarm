@@ -10,15 +10,17 @@ This project demonstrates building software from scratch while applying modern s
 
 ## Features
 
-- Manage farms, crops, and resources  
-- Track farm activities and state changes  
+- Manage crops and crop growth jobs  
+- Simulate crop growth using background workers  
 - RESTful API design following best practices  
-- Scalable and maintainable architecture  
+- PostgreSQL integration with Docker-based setup  
+- Scalable and maintainable layered architecture  
 
 
 ## Tech Stack
 
-- **Backend:** ASP.NET Core Web API (latest .NET version)  
+- **Backend:** ASP.NET Core Web API (.NET 10)  
+- **Background Processing:** .NET Worker Service  
 - **Database:** PostgreSQL with Docker  
 - **ORM:** Entity Framework Core  
 - **Architecture:** Layered architecture for separation of concerns (API, Application, Domain, Infrastructure)  
@@ -34,6 +36,7 @@ The project follows a layered architecture:
 - **Application** – Contains business logic and use cases  
 - **Domain** – Core entities and domain rules  
 - **Infrastructure** – Database access and external services  
+- **Worker** – Monitors crop jobs and updates growth status in the background  
 
 This structure ensures separation of concerns and maintainability.
 
@@ -55,6 +58,16 @@ This structure ensures separation of concerns and maintainability.
 To start the PostgreSQL database using Docker, navigate to the `docker` folder and run:
 
 docker-compose up -d
+
+### Run Migrations
+
+From the `src` folder, run the following command to apply database migrations:
+
+dotnet ef database update --project MuFarm.Infrastructure --startup-project MuFarm.API
+
+If dotnet-ef is not installed, install it globally using:
+
+dotnet tool install --global dotnet-ef
 
 
 ## Project Status

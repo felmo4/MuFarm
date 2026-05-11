@@ -16,7 +16,6 @@ namespace MuFarm.Application.Services
         }
 
 
-
         public async Task<Guid> PlantCropAsync(int cropId)
         {
             var crop = await _unitOfWork.Crops.GetByIdAsync(cropId);
@@ -36,10 +35,23 @@ namespace MuFarm.Application.Services
             return cropJob.Id;
         }
 
+        public async Task ProcessReadyJobAsync()
+        {
+            var jobs = await _unitOfWork.CropJobs.GetReadyToUpdateJobsAsync();
+
+            foreach (var job in jobs)
+            {
+                job.Status = CropJobStatus.Ready;   
+            }
+
+            await _unitOfWork.SaveAsync();
+        }
+
         public Task HarvestCropAsync(Guid cropJobId)
         {
             throw new NotImplementedException();
         }
 
+        
     }
 }

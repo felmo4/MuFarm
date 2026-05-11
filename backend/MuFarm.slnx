@@ -4,6 +4,7 @@
     <Project Path="src/MuFarm.Application/MuFarm.Application.csproj" />
     <Project Path="src/MuFarm.Domain/MuFarm.Domain.csproj" />
     <Project Path="src/MuFarm.Infrastructure/MuFarm.Infrastructure.csproj" Id="c34a29a5-bd27-4ff0-969d-7d67a4c5f99e" />
+    <Project Path="src/MuFarm.Worker/MuFarm.Worker.csproj" Id="e5d9bb13-6f9e-4a2f-8b29-f74de1e5e538" />
   </Folder>
   <Folder Name="/tests/">
     <Project Path="tests/MuFarm.IntegrationTests/MuFarm.IntegrationTests.csproj" Id="de0687cb-11b3-408d-ac81-edcf3bedc624" />

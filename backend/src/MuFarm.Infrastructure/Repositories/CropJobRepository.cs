@@ -1,7 +1,8 @@
-﻿using MuFarm.Domain.Entities;
-using MuFarm.Infrastructure.Data;
+﻿using Microsoft.EntityFrameworkCore;
 using MuFarm.Application.Interfaces.Repositories;
-using Microsoft.EntityFrameworkCore;
+using MuFarm.Domain.Entities;
+using MuFarm.Domain.Enums;
+using MuFarm.Infrastructure.Data;
 
 
 namespace MuFarm.Infrastructure.Repositories
@@ -16,9 +17,17 @@ namespace MuFarm.Infrastructure.Repositories
         public async Task<IEnumerable<CropJob>?> GetAllAsync()
             => await _context.CropJobs.ToListAsync();
 
+        public async Task<IEnumerable<CropJob>?> GetReadyToUpdateJobsAsync()
+            => await _context.CropJobs
+                .Where(x =>
+                    x.Status == CropJobStatus.Growing &&
+                    x.ReadyAt <= DateTime.UtcNow)
+                .ToListAsync();
+
         public async Task AddAsync(CropJob newCropJob)
             => await _context.CropJobs.AddAsync(newCropJob);
 
-
+        
+        
     }
 }
