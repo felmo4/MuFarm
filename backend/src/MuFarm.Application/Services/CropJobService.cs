@@ -37,14 +37,7 @@ namespace MuFarm.Application.Services
 
         public async Task ProcessReadyJobAsync()
         {
-            var jobs = await _unitOfWork.CropJobs.GetReadyToUpdateJobsAsync();
-
-            foreach (var job in jobs)
-            {
-                job.Status = CropJobStatus.Ready;   
-            }
-
-            await _unitOfWork.SaveAsync();
+            await _unitOfWork.CropJobs.MarkReadyJobsAsync();
         }
 
         public Task HarvestCropAsync(Guid cropJobId)
