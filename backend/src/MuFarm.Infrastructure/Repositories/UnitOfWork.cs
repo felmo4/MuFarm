@@ -11,7 +11,7 @@ namespace MuFarm.Infrastructure.Repositories
         private ICropJobRepository _cropJob;
 
         public UnitOfWork(MuFarmDbContext context) 
-            => _context = context;
+            => this._context = context;
         
         public ICropRepository Crops => _crops ??= new CropRepository(_context);
         public ICropJobRepository CropJobs => _cropJob ??= new CropJobRepository(_context);

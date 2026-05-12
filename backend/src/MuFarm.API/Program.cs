@@ -1,20 +1,17 @@
-using Microsoft.EntityFrameworkCore;
-using MuFarm.Application.Interfaces.Repositories;
-using MuFarm.Application.Interfaces.Services;
-using MuFarm.Application.Services;
+using MuFarm.Application.DependencyInjection;
 using MuFarm.Infrastructure.Data;
-using MuFarm.Infrastructure.Repositories;
+using MuFarm.Infrastructure.DependencyInjection;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
-builder.Services.AddDbContext<MuFarmDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
-);
+
 builder.Services.AddScoped<DbSeeder>();
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-builder.Services.AddScoped<ICropJobService, CropJobService>();
+
+builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddApplication();
 
 
 var app = builder.Build();
