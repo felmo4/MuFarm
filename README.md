@@ -53,21 +53,15 @@ This structure ensures separation of concerns and maintainability.
 - .NET SDK
 - Docker Desktop
 
-### Running the Database
+### Database Setup
+
+The application automatically applies pending database migrations on startup using EF Core `MigrateAsync()`.
+
+Ensure the PostgreSQL container is running before starting the application.
 
 To start the PostgreSQL database using Docker, navigate to the `docker` folder and run:
 
 docker-compose up -d
-
-### Run Migrations
-
-From the `src` folder, run the following command to apply database migrations:
-
-dotnet ef database update --project MuFarm.Infrastructure --startup-project MuFarm.API
-
-If dotnet-ef is not installed, install it globally using:
-
-dotnet tool install --global dotnet-ef
 
 
 ## Project Status

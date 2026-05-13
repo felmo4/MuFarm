@@ -1,43 +1,58 @@
+using Microsoft.EntityFrameworkCore;
+using MuFarm.API.Middlewares;
 using MuFarm.Application.DependencyInjection;
 using MuFarm.Infrastructure.Data;
 using MuFarm.Infrastructure.DependencyInjection;
+using Serilog;
 
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .CreateBootstrapLogger();
 
-var builder = WebApplication.CreateBuilder(args);
-
-builder.Services.AddControllers();
-builder.Services.AddOpenApi();
-
-builder.Services.AddScoped<DbSeeder>();
-
-builder.Services.AddInfrastructure(builder.Configuration);
-builder.Services.AddApplication();
-
-
-var app = builder.Build();
-
-using(var scope = app.Services.CreateScope())
+try
 {
-    var env = scope.ServiceProvider.GetRequiredService<IHostEnvironment>();
-    var config  = scope.ServiceProvider.GetRequiredService<IConfiguration>();
-    var enableSeed = config.GetValue<bool>("Seeding:Enabled");
+    Log.Information("MuFarm API starting up");
 
-    if(env.IsDevelopment() && enableSeed)
+    var builder = WebApplication.CreateBuilder(args);
+
+    builder.Host.UseSerilog((context, config) =>
     {
-        var seeder = scope.ServiceProvider.GetRequiredService<DbSeeder>();
-        await seeder.SeedAsync();
+        config.ReadFrom.Configuration(context.Configuration);
+    });
+    builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+    builder.Services.AddProblemDetails();
+    builder.Services.AddControllers();
+    builder.Services.AddOpenApi();
+
+    builder.Services.AddScoped<DbSeeder>();
+    builder.Services.AddInfrastructure(builder.Configuration);
+    builder.Services.AddApplication();
+
+
+    var app = builder.Build();
+
+    await DbInitializer.InitializeAsync(app.Services);
+    
+    // Configure the HTTP request pipeline.
+    if (app.Environment.IsDevelopment())
+    {
+        app.MapOpenApi();
     }
+
+    app.UseAuthorization();
+    app.MapControllers();
+
+    app.UseSerilogRequestLogging();
+    app.UseExceptionHandler();
+
+    app.Run();
+
 }
-
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+catch (Exception ex)
 {
-    app.MapOpenApi();
+    Log.Fatal(ex, "Application terminated unexpectedly");
 }
-
-app.UseAuthorization();
-
-app.MapControllers();
-
-app.Run();
+finally
+{
+    Log.CloseAndFlush();
+}
