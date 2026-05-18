@@ -63,6 +63,15 @@ To start the PostgreSQL database using Docker, navigate to the `docker` folder a
 
 docker-compose up -d
 
+pgAdmin is included for PostgreSQL database management during development.
+
+Access it at:
+http://localhost:5050
+
+Login credentials:
+- Email: admin@portfolio.com
+- Password: adminpassword
+
 
 ## Project Status
 

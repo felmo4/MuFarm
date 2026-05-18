@@ -13,5 +13,16 @@ services:
     volumes:
       - mufarm_data:/var/lib/postgresql/data
 
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin_gui
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@portfolio.com
+      PGADMIN_DEFAULT_PASSWORD: adminpassword
+    ports:
+      - "5050:80" # Maps port 80 inside the container to http://localhost:5050
+    depends_on:
+      - mufarm-db
+
 volumes:
   mufarm_data:
